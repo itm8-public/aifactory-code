@@ -19,6 +19,10 @@ and before the Replatform agent or a reviewer looks at it:
 8. The checklist in `GUARD.md` is ticked: every trust boundary has a refusal test that passes, and
    a full audit with the `security-audit` skill ran on the source. Each confirmed finding is fixed
    or accepted in writing by a person; its report stays outside the repository.
+9. For **Yellow or Red**: the production-readiness checklist in
+   [production-readiness.md](production-readiness.md) is walked — a named system owner and business
+   owner, the security requirements verified against their acceptance criteria, and the five
+   POC-to-production gates surfaced — with open items recorded. Green needs only the free checks above.
 
 What itm8 does next:
 

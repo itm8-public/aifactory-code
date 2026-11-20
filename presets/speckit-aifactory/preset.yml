@@ -3,7 +3,7 @@ schema_version: "1.0"
 preset:
   id: "itm8-aifactory"
   name: "itm8 AI Factory"
-  version: "0.8.1"
+  version: "0.8.2"
   description: "AI Factory build rules as the constitution, data-and-zone questions in the spec, signed AI Factory gates in the plan, and the build check after implement"
   author: "itm8"
   repository: "https://github.com/itm8-public/aifactory-code"

@@ -521,4 +521,19 @@ export const RULES = [
         : fail("Add the browser support target to AGENTS.md: This project's Baseline target is Baseline Widely available.");
     },
   },
+  {
+    id: 'AF-33',
+    severity: 'WARN',
+    title: 'No request bodies, headers or whole environment in logs',
+    check(ctx) {
+      const hits = grep(
+        ctx,
+        serverCode(ctx),
+        /(?:console\.(?:log|info|warn|error|debug)|\b(?:logger|fastify\.log|log)\.(?:log|info|warn|error|debug|trace)|\blogging\.(?:info|warning|error|debug|exception)|\bprint)\s*\([^;]*(?:\b(?:req|request|ctx)\.(?:body|headers|rawHeaders)\b|\bprocess\.env\b(?!\.))/,
+      );
+      return hits.length
+        ? fail('Logging a request body, its headers or the whole environment can leak personal or secret data: log ids and outcomes, not payloads', hits)
+        : pass();
+    },
+  },
 ];

@@ -38,6 +38,7 @@ both for one minor release.
 | AF-30 | WARN | With `specs/`: no open `[NEEDS CLARIFICATION]` after planning, the AI Factory gates G1 to G7 filled (a note for FAIL and ASK) and signed off by a person, `features` in the build profile in step | Stop and ask a person first; Before you hand over |
 | AF-31 | FAIL | No unsafe code shapes outside tests: TLS checks switched off, text run as code (`eval`, `new Function`, `pickle`), shell commands or SQL built from strings, raw HTML (`dangerouslySetInnerHTML`, `innerHTML =`), CORS open to every site. The code guard blocks the same shapes at write time, with AF-09 and AF-19 | Web security; `GUARD.md` step 3 |
 | AF-32 | WARN | With pages (HTML, CSS, TSX, JSX, Vue or Svelte files): `AGENTS.md` states the browser support target with the sentence `This project's Baseline target is Baseline Widely available.` (another Baseline target is accepted). The scaffold writes it in "This project" | This project |
+| AF-33 | WARN | No request body, headers or the whole `process.env` written to a log or `print` in server code (log ids and outcomes, not payloads) | Configuration and secrets; Logging |
 
 For a standalone Copilot agent (`--kind copilot`, no container) the container rules (AF-02 to
 AF-08, AF-10, AF-20) report SKIP.
