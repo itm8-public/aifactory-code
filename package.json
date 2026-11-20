@@ -1,0 +1,14 @@
+{
+  "name": "itm8-aifactory-code-plugin",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "scaffold": "node scripts/scaffold.mjs",
+    "build-check": "node scripts/build-check.mjs",
+    "vendor:drift": "node scripts/vendor-sync.mjs --drift",
+    "vendor:sync": "node scripts/vendor-sync.mjs"
+  }
+}

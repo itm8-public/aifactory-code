@@ -1,0 +1,55 @@
+{
+  "tools": [
+// @if addon
+    {
+      "name": "get_service_info",
+      "title": "Get service information",
+      "description": "Name of this service, the signed-in caller and the server time. Use it to check the connection.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+// @if db
+    },
+    {
+      "name": "search_items",
+      "title": "Search items",
+      "description": "Find items whose title contains the query. Returns at most `limit` items, newest first.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "Words to look for in the title."
+          },
+          "limit": {
+            "default": 10,
+            "description": "Most items to return.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+// @endif
+    }
+// @endif
+  ]
+}

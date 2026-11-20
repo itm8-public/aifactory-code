@@ -1,0 +1,31 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1793256034336,
+      "tag": "0000_init",
+      "breakpoints": true
+// @if ai
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793256036225,
+      "tag": "0001_ai_usage",
+      "breakpoints": true
+// @endif
+// @if agent
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793289577052,
+      "tag": "0002_agent_actions",
+      "breakpoints": true
+// @endif
+    }
+  ]
+}

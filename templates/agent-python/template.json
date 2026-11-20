@@ -1,0 +1,12 @@
+{
+  "description": "AI Factory Python agent: one container, FastAPI on port 8080 behind Easy Auth, Microsoft Agent Framework on Azure AI Foundry, PostgreSQL with Entra tokens, propose-then-approve actions, a small chat page.",
+  "rename": {
+    "_gitignore": ".gitignore",
+    "_dockerignore": ".dockerignore"
+  },
+  "skip": ["template.json"],
+  "designKit": {
+    "dest": "app/static/design",
+    "include": ["tokens/**", "assets/logo/**"]
+  }
+}

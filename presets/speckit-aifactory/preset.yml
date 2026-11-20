@@ -1,0 +1,52 @@
+schema_version: "1.0"
+
+preset:
+  id: "itm8-aifactory"
+  name: "itm8 AI Factory"
+  version: "0.8.1"
+  description: "AI Factory build rules as the constitution, data-and-zone questions in the spec, signed AI Factory gates in the plan, and the build check after implement"
+  author: "itm8"
+  repository: "https://github.com/itm8-public/aifactory-code"
+  license: "LicenseRef-itm8-source-available"
+
+requires:
+  # Verified with specify-cli 1.2.5 (CI job speckit-preset).
+  speckit_version: ">=1.2.5"
+
+provides:
+  templates:
+    - type: "template"
+      name: "constitution-template"
+      file: "templates/constitution-template.md"
+      description: "AGENTS.md (the AI Factory build rules) is the constitution; principles follow the AI Factory gates"
+      replaces: "constitution-template"
+
+    - type: "template"
+      name: "spec-template"
+      file: "templates/spec-template.md"
+      description: "Adds the Data and zone (AI Factory) section"
+      strategy: "append"
+
+    - type: "template"
+      name: "plan-template"
+      file: "templates/plan-template.md"
+      description: "Adds the AI Factory gates G1-G7 with a person's sign-off"
+      strategy: "append"
+
+    - type: "template"
+      name: "tasks-template"
+      file: "templates/tasks-template.md"
+      description: "Ends every task list with the AI Factory build check"
+      strategy: "append"
+
+    - type: "command"
+      name: "speckit.implement"
+      file: "commands/speckit.implement.md"
+      description: "Implement within the AI Factory build rules: signed gates first, the build check last"
+      strategy: "wrap"
+
+tags:
+  - "itm8"
+  - "ai-factory"
+  - "azure"
+  - "compliance"

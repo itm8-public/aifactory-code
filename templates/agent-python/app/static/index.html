@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>__TITLE__</title>
+    <link rel="stylesheet" href="./design/tokens/colors.css" />
+    <link rel="stylesheet" href="./design/tokens/typography.css" />
+    <link rel="stylesheet" href="./design/tokens/spacing.css" />
+    <link rel="stylesheet" href="./design/tokens/base.css" />
+    <link rel="stylesheet" href="./app.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__inner">
+        <a class="brand" href="./"><img src="./design/assets/logo/itm8-logo-purple.svg" alt="" height="32" /><span>__TITLE__</span></a>
+        <span class="user" id="user"></span>
+      </div>
+    </header>
+    <main class="container main">
+      <h2>Assistant</h2>
+      <p class="notice">
+        You are talking to an AI. It can look things up and propose changes, but nothing changes until you approve
+        it below. Answers can be wrong. Do not enter personal data.
+      </p>
+      <section id="pending" class="card card--muted" hidden>
+        <h3>Waiting for your approval</h3>
+        <ul id="actions" class="list"></ul>
+      </section>
+      <ul id="turns" class="list" aria-live="polite"></ul>
+      <form id="form" class="card card--outlined form">
+        <label for="message">Message</label>
+        <textarea id="message" rows="3" maxlength="4000" required></textarea>
+        <button type="submit" class="btn">Send</button>
+      </form>
+      <p id="error" role="alert"></p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+# Build, test and scan. No deployment: itm8's Wizard generates the deploy pipelines.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+# @if db
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_DB: app_test
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d app_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGDATABASE_TEST: app_test
+# @endif
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # Two commits: the pull request verdict compares the merge commit with its base.
+          fetch-depth: 2
+      - name: Secret scan
+        id: secrets
+        run: docker run --rm -v "$PWD:/repo" ghcr.io/gitleaks/gitleaks:v8.28.0 dir /repo --redact --no-banner
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 24
+          cache: npm
+      - id: install
+        run: npm ci
+      - id: lint
+        run: npm run lint
+      - id: typecheck
+        run: npm run typecheck
+      - id: test
+        run: npm test
+# @if copilot
+      - name: Copilot package matches the MCP tools
+        id: copilot
+        run: npm run copilot:check
+      # Schema and Microsoft's validation rules. Placeholder ids: CI never signs in or publishes.
+      - name: Validate the Copilot app package (Microsoft 365 Agents Toolkit)
+        id: copilot-validate
+        working-directory: copilot
+        run: |
+          grep -v '^TEAMS_APP_ID=' env/.env.dev > "$RUNNER_TEMP/validate.env"
+          echo "TEAMS_APP_ID=8c3a1f52-6a3e-4c1d-9f6e-2b7d1e0a4c11" >> "$RUNNER_TEMP/validate.env"
+          echo "MCP_SSO_REFERENCE_ID=ci-placeholder" >> "$RUNNER_TEMP/validate.env"
+          npx -y @microsoft/m365agentstoolkit-cli@1.1.18 validate --env-file "$RUNNER_TEMP/validate.env" --interactive false
+# @endif
+      - id: build
+        run: npm run build
+      - name: Dependency audit (production dependencies)
+        id: audit
+        run: npm audit --omit=dev --audit-level=high
+      - name: Container build (no push)
+        id: image
+        run: docker build -t app:ci .
+      # Says whether a person has to look at this pull request (needs-a-person or no-escalation),
+      # and why: it touches identity or access, a database migration, CI or deployment
+      # configuration, a dependency manifest or lock file, or a check above failed or did not run.
+      # Rules only, no model. It blocks nothing by itself: the result is in the job summary.
+      - name: Pull request verdict
+        id: verdict
+        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+        continue-on-error: true
+        env:
+          CHECKS: >-
+            secret-scan=${{ steps.secrets.outcome }}
+            install=${{ steps.install.outcome }}
+            lint=${{ steps.lint.outcome }}
+            typecheck=${{ steps.typecheck.outcome }}
+            tests=${{ steps.test.outcome }}
+# @if copilot
+            copilot-package=${{ steps.copilot.outcome }}
+            copilot-validation=${{ steps.copilot-validate.outcome }}
+# @endif
+            build=${{ steps.build.outcome }}
+            dependency-audit=${{ steps.audit.outcome }}
+            container-build=${{ steps.image.outcome }}
+        run: node scripts/pr-verdict.ts HEAD^1 $CHECKS
+
+  # Static analysis. CodeQL needs GitHub Advanced Security on the repository; without it, remove
+  # this job and add another analyzer (for example Semgrep) instead.
+  codeql:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@v4
+        with:
+          languages: javascript-typescript
+      - uses: github/codeql-action/analyze@v4

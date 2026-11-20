@@ -1,0 +1,64 @@
+{
+  "description": "AI Factory TypeScript container: Fastify 5 on port 8080 behind Easy Auth. Kind web serves a React/Vite front end and /api; kind mcp is an MCP server. Optional PostgreSQL, AI, agent with approval and MCP endpoint.",
+  "rename": {
+    "_gitignore": ".gitignore",
+    "_dockerignore": ".dockerignore"
+  },
+  "only": {
+    "spa": [
+      "src/web/**",
+      "vite.config.ts",
+      "src/server/routes/items.ts",
+      "src/server/items.test.ts"
+    ],
+    "db": [
+      "docker-compose.yml",
+      "docker/**",
+      "drizzle/**",
+      "drizzle.config.ts",
+      "src/server/db/**",
+      "src/server/lib/audit.ts",
+      "src/server/test/global-setup.ts",
+      "src/server/routes/items.ts",
+      "src/server/items.test.ts",
+      "src/web/pages/ItemsPage.tsx"
+    ],
+    "ai": [
+      "src/server/lib/ai.ts",
+      "src/server/lib/ai-quota.ts",
+      "src/server/routes/ai.ts",
+      "src/server/ai.test.ts",
+      "src/web/pages/AskPage.tsx",
+      "drizzle/0001_ai_usage.sql",
+      "drizzle/meta/0001_snapshot.json"
+    ],
+    "agent": [
+      "src/server/lib/agent.ts",
+      "src/server/lib/agent-tools.ts",
+      "src/server/routes/agent.ts",
+      "src/server/agent.test.ts",
+      "src/web/pages/AgentPage.tsx",
+      "drizzle/0002_agent_actions.sql",
+      "drizzle/meta/0002_snapshot.json",
+      "evals/**",
+      "scripts/eval.ts"
+    ],
+    "mcp": [
+      "src/server/routes/mcp.ts",
+      "src/server/lib/mcp-tools.ts",
+      "src/server/mcp.test.ts"
+    ],
+    "copilot": [
+      "scripts/copilot-tools.ts"
+    ]
+  },
+  "locks": {
+    "spa": "locks/spa.package-lock.json",
+    "spa-db": "locks/spa-db.package-lock.json",
+    "spa-db-mcp": "locks/spa-db-mcp.package-lock.json",
+    "api-mcp": "locks/api-mcp.package-lock.json",
+    "api-db-mcp": "locks/api-db-mcp.package-lock.json"
+  },
+  "skip": ["template.json", "locks/**"],
+  "designKit": { "dest": "src/web/design", "when": "spa" }
+}

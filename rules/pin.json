@@ -1,0 +1,31 @@
+{
+  "kitVersion": "0.2",
+  "source": {
+    "comment": "rules/build-kit/* are mirrored byte-for-byte from itm8's internal AI Factory build-kit and are maintained by itm8. The sha256 hashes below let `npm run check` verify the shipped copies are intact. Remote re-pinning against the upstream repository is an itm8-internal maintenance step and is not part of this public copy.",
+    "ref": "main",
+    "commit": "9c85dc44078fd4b21a4eda96e65d17404e51f5e4"
+  },
+  "files": [
+    {
+      "upstream": "build-kit/AGENTS.md",
+      "local": "rules/build-kit/AGENTS.md",
+      "sha256": "f85e966bcd8ca5e3f2e49e56b824db3f97feac6ffb9cbac07894c0ef0a84efa2"
+    },
+    {
+      "upstream": "build-kit/PERFORMANCE.md",
+      "local": "rules/build-kit/PERFORMANCE.md",
+      "sha256": "62002b12b30c6885ca347bf6f068894d247dfab754348ad6f187d2070be7ec99"
+    },
+    {
+      "upstream": "build-kit/GUARD.md",
+      "local": "rules/build-kit/GUARD.md",
+      "sha256": "ae9bc159d23dd787fde05304af9904edbc5e2655cd8ff8b135916210d2c84cd1"
+    },
+    {
+      "upstream": "build-kit/hosted-builders.md",
+      "local": "rules/build-kit/hosted-builders.md",
+      "sha256": "9c249e6ef6bbb13bb084896f565a6d086ae0827805123343fcf68699471a173f"
+    }
+  ],
+  "pinnedAt": "2026-11-17"
+}

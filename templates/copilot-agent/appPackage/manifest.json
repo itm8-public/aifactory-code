@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.22",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "itm8",
+    "websiteUrl": "${{APP_PUBLIC_URL}}",
+    "privacyUrl": "${{APP_PUBLIC_URL}}",
+    "termsOfUseUrl": "${{APP_PUBLIC_URL}}"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "__SHORT_NAME__${{APP_NAME_SUFFIX}}",
+    "full": "__TITLE__${{APP_NAME_SUFFIX}}"
+  },
+  "description": {
+    "short": "Answers from __SHORT_NAME__ with your own access.",
+    "full": "Ask Microsoft 365 Copilot about __TITLE__. The agent reads through the app's MCP server with your own sign-in and access, and it cannot change anything."
+  },
+  "accentColor": "#5F259F",
+  "copilotAgents": {
+    "declarativeAgents": [
+      {
+        "id": "declarativeAgent",
+        "file": "declarativeAgent.json"
+      }
+    ]
+  },
+  "permissions": ["identity"],
+  "validDomains": []
+}

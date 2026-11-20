@@ -1,0 +1,62 @@
+/* itm8 base element styles — lightweight resets + brand defaults.
+   Applies the brand type & color to bare HTML so specimen cards and
+   simple pages look on-brand without extra classes. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: var(--fw-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-body);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-heading-bold);
+  color: var(--text-heading);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+h1 { font-size: var(--fs-h1); letter-spacing: var(--ls-display); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+a {
+  color: var(--text-link);
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+  text-decoration-thickness: 1.5px;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+a:hover { color: var(--accent-primary-hover); }
+
+strong, b { font-weight: var(--fw-body-medium); }
+
+small { font-size: var(--fs-caption); color: var(--text-muted); }
+
+hr { border: 0; border-top: var(--border-hair) solid var(--border-default); margin: var(--space-6) 0; }
+
+::selection { background: var(--itm8-green); color: var(--itm8-black); }
+
+:focus-visible { outline: none; box-shadow: var(--shadow-focus); border-radius: var(--radius-xs); }
+
+/* Uppercase CVI label, e.g. the "COLORS / FONTS / THE 5TH ELEMENT" tags */
+.itm8-overline {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-heading-bold);
+  font-size: var(--fs-overline);
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  color: var(--itm8-grey);
+}

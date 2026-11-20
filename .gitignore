@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+# Agents Toolkit env files in the Copilot template hold names and placeholders only.
+!templates/copilot-agent/env/.env.dev
+!templates/copilot-agent/env/.env.prod
+*.log
+.DS_Store
+/tmp/

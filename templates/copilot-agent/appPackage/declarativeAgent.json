@@ -1,0 +1,33 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.9/schema.json",
+  "version": "v1.9",
+  "name": "__SHORT_NAME__",
+  "description": "Answers questions about __TITLE__ through its MCP server, with the signed-in user's own access. Read-only.",
+  "instructions": "$[file('instructions.txt')]",
+  "actions": [{ "id": "mcpServer", "file": "ai-plugin.json" }],
+  "behavior_overrides": {
+    "special_instructions": { "discourage_model_knowledge": true },
+    "default_response_mode": "Auto"
+  },
+  "disclaimer": {
+    "text": "AI-generated from __TITLE__. Check the source before you act on an answer."
+  },
+  "conversation_starters": [
+// @if addon
+    {
+      "title": "Check the connection",
+      "text": "Which service am I connected to, and who am I signed in as?"
+    },
+// @endif
+// @if db
+    {
+      "title": "Find items",
+      "text": "Find the newest items about reports."
+    },
+// @endif
+    {
+      "title": "What can you do",
+      "text": "What can you look up for me, and what can you not do?"
+    }
+  ]
+}

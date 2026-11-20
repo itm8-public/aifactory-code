@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+# Settings with values stay on your machine. Only .env.example (names) is committed.
+.env
+.env.*
+!.env.example

@@ -1,0 +1,23 @@
+{
+  "name": "itm8-aifactory-code",
+  "description": "itm8 AI Factory build plugin for Claude Code",
+  "owner": { "name": "itm8 SE Digital Transformation" },
+  "metadata": { "description": "Build new apps and agents that fit the itm8 AI Factory" },
+  "plugins": [
+    {
+      "name": "aifactory-code",
+      "source": "./",
+      "description": "Design, scaffold and check new itm8 AI Factory solutions"
+    },
+    {
+      "name": "modern-web-guidance",
+      "source": {
+        "source": "github",
+        "repo": "GoogleChrome/modern-web-guidance",
+        "ref": "v1.0.1",
+        "sha": "64a6d708f5a43f2cd3fde5d4d7db3905ba1bdf65"
+      },
+      "description": "Third party, optional: Google Chrome's Modern Web Guidance skill, pinned to v1.0.1. Not part of this repository. Read the README first: it runs npx and sends usage data unless DISABLE_TELEMETRY=1 is set."
+    }
+  ]
+}

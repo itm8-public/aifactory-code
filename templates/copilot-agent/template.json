@@ -1,0 +1,10 @@
+{
+  "description": "Microsoft 365 Copilot declarative agent (Microsoft 365 Agents Toolkit) that calls an AI Factory MCP server with Entra SSO and a pinned tool list. As an add-on it is written to copilot/ in the project; as --kind copilot it is the project.",
+  "rename": {
+    "_gitignore": ".gitignore"
+  },
+  "only": {
+    "standalone": ["CLAUDE.md", ".github/**"]
+  },
+  "skip": ["template.json"]
+}

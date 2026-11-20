@@ -1,0 +1,179 @@
+# Scaffolds every starter variant and runs it like a real project: install from the committed
+# lock, lint, typecheck, tests against PostgreSQL, build, build check and a container build.
+# Also installs the Spec Kit preset into a real Spec Kit project.
+name: Templates
+
+on:
+  pull_request:
+    paths: ['templates/**', 'skills/itm8-design/kit/**', 'scripts/**', 'rules/**', 'presets/**']
+  push:
+    branches: [main]
+    paths: ['templates/**', 'skills/itm8-design/kit/**', 'scripts/**', 'rules/**', 'presets/**']
+  schedule:
+    - cron: '17 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typescript:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        variant:
+          - { name: web, flags: '--kind web' }
+          - { name: web-db, flags: '--kind web --db' }
+          - { name: web-db-ai, flags: '--kind web --db --ai' }
+          - { name: web-all, flags: '--kind web --db --ai --agent --mcp --copilot', copilot: true }
+          - { name: mcp, flags: '--kind mcp' }
+          - { name: mcp-db, flags: '--kind mcp --db' }
+          - { name: mcp-copilot, flags: '--kind mcp --copilot', copilot: true }
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_DB: app_test
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d app_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGDATABASE_TEST: app_test
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 24
+      - name: Scaffold
+        run: node scripts/scaffold.mjs --dest "$RUNNER_TEMP/app" --title "Template ${{ matrix.variant.name }}" --target lz-online ${{ matrix.variant.flags }}
+      - name: Install, lint, typecheck, test, build
+        working-directory: ${{ runner.temp }}/app
+        run: |
+          npm ci --no-audit --no-fund
+          npm run lint
+          npm run typecheck
+          npm test
+          npm run build
+      - name: Build check
+        run: node scripts/build-check.mjs "$RUNNER_TEMP/app"
+      - name: Copilot package (pinned tools, Agents Toolkit validation)
+        if: ${{ matrix.variant.copilot }}
+        working-directory: ${{ runner.temp }}/app
+        run: |
+          npm run copilot:check
+          cd copilot
+          grep -v '^TEAMS_APP_ID=' env/.env.dev > "$RUNNER_TEMP/validate.env"
+          echo "TEAMS_APP_ID=8c3a1f52-6a3e-4c1d-9f6e-2b7d1e0a4c11" >> "$RUNNER_TEMP/validate.env"
+          echo "MCP_SSO_REFERENCE_ID=ci-placeholder" >> "$RUNNER_TEMP/validate.env"
+          npx -y @microsoft/m365agentstoolkit-cli@1.1.18 validate --env-file "$RUNNER_TEMP/validate.env" --interactive false
+      - name: Container build (no push)
+        working-directory: ${{ runner.temp }}/app
+        run: docker build -t template-${{ matrix.variant.name }} .
+
+  copilot-agent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 24
+      - name: Scaffold
+        run: node scripts/scaffold.mjs --dest "$RUNNER_TEMP/copilot" --title "Template copilot" --target lz-online --kind copilot --mcp-url https://app.example.com/mcp
+      - name: Pinned tools, build check, Agents Toolkit validation
+        working-directory: ${{ runner.temp }}/copilot
+        run: |
+          node scripts/sync-tools.mjs --check
+          node "$GITHUB_WORKSPACE/scripts/build-check.mjs" .
+          grep -v '^TEAMS_APP_ID=' env/.env.dev > "$RUNNER_TEMP/validate.env"
+          echo "TEAMS_APP_ID=8c3a1f52-6a3e-4c1d-9f6e-2b7d1e0a4c11" >> "$RUNNER_TEMP/validate.env"
+          echo "MCP_SSO_REFERENCE_ID=ci-placeholder" >> "$RUNNER_TEMP/validate.env"
+          npx -y @microsoft/m365agentstoolkit-cli@1.1.18 validate --env-file "$RUNNER_TEMP/validate.env" --interactive false
+
+  python-agent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_DB: app_test
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d app_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGDATABASE_TEST: app_test
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - run: pip install uv==0.13.6
+      - name: Scaffold
+        run: node scripts/scaffold.mjs --dest "$RUNNER_TEMP/agent" --title "Template agent" --target lz-online --kind agent
+      - name: Sync, lint, format, test, audit
+        working-directory: ${{ runner.temp }}/agent
+        run: |
+          uv sync --frozen
+          uv run ruff check .
+          uv run ruff format --check .
+          uv run pytest
+          uv run pip-audit --skip-editable
+      - name: Build check
+        run: node scripts/build-check.mjs "$RUNNER_TEMP/agent"
+      - name: Container build (no push)
+        working-directory: ${{ runner.temp }}/agent
+        run: docker build -t template-agent .
+
+  speckit-preset:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      COLUMNS: '200'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Install Spec Kit 1.2.5 (pinned by commit)
+        run: |
+          pip install uv==0.13.6
+          uv tool install specify-cli --from "git+https://github.com/github/spec-kit.git@4572a67fe0e72a6837e2d7bb0fda875bc41482e5"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Init a project, add the preset, check what resolves
+        working-directory: ${{ runner.temp }}
+        run: |
+          specify init demo --integration claude --ignore-agent-tools --non-interactive --script sh
+          cd demo
+          specify preset add constitution-sync
+          specify preset add --dev "$GITHUB_WORKSPACE/presets/speckit-aifactory"
+          grep -q 'is this project.s constitution' .specify/memory/constitution.md
+          for t in spec-template plan-template tasks-template; do
+            specify preset resolve "$t" | grep -q '\[append\] itm8-aifactory'
+          done
+          grep -q 'itm8 AI Factory: before you start' .claude/skills/speckit-implement/SKILL.md

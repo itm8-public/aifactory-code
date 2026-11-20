@@ -1,0 +1,21 @@
+{
+  "description": "aifactory-code guards. Command guard: denies reckless shell commands and asks a person before destructive ones. Protected files guard: asks a person before a change to CI, deployment or infrastructure configuration that is already in the repository. Secret guard: blocks writing .env files and secret-shaped values. Code guard, inside AI Factory projects only: blocks infrastructure code, direct AI providers and unsafe code shapes (AF-09, AF-19, AF-31).",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/command-guard.mjs\"", "timeout": 10 }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/secret-guard.mjs\"", "timeout": 10 },
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/code-guard.mjs\"", "timeout": 10 },
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/protected-files-guard.mjs\"", "timeout": 10 }
+        ]
+      }
+    ]
+  }
+}

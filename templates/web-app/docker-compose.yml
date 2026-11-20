@@ -1,0 +1,23 @@
+# Local PostgreSQL for development and tests only. It trusts connections from this machine, so
+# no password exists anywhere, and it listens on 127.0.0.1 only. Azure uses Entra tokens.
+services:
+  postgres:
+    image: postgres:18-alpine
+    ports:
+      # PGPORT from .env (docker compose reads it); 55432 avoids clashes with other local databases.
+      - '127.0.0.1:${PGPORT:-55432}:5432'
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d app']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata: {}

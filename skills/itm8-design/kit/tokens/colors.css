@@ -1,0 +1,63 @@
+/* itm8 Color Palette — from the itm8 CVI (Corporate Visual Identity) */
+:root {
+  /* ---- Brand primaries ---- */
+  --itm8-purple:        #5F259F; /* Primary, dominant — headings, logo, fills, dark backgrounds */
+  --itm8-black:         #000000; /* Secondary primary — body text, accents */
+  --itm8-ink:           #171717; /* Official theme text color (dk1) */
+  --itm8-white:         #FFFFFF; /* Canvas, reverse text */
+
+  /* ---- Purple tints (secondary fills, backgrounds, dividers) ---- */
+  --itm8-purple-mid:    #7E52B2; /* Official theme accent2 */
+  --itm8-lavender:      #9F7EC6; /* Official theme accent3 — secondary fills, subtle accents */
+  --itm8-lavender-icon: #BEA9D8; /* Icon accent fill (as used in the icon library) */
+  --itm8-lavender-light:#CFBDE2; /* Backgrounds, dividers */
+  --itm8-lavender-pale: #EEE9F5; /* Soft backgrounds, table banding */
+
+  /* ---- Green "pop" — HIGHLIGHTS ONLY, never a page background ---- */
+  --itm8-green:         #B6DCCA; /* Official theme accent6 — links, CTAs, callouts, key numbers */
+  --itm8-mint:          #64D9A4; /* Official theme accent5 — divider slides, strong highlights */
+  --itm8-green-tint:    #D0F3E3; /* Tertiary — sparingly, when purple/black don't fit */
+
+  /* ---- Neutral ---- */
+  --itm8-grey:          #9D9D9D; /* Captions, secondary metadata */
+  --itm8-grey-line:     #E2E2E2; /* Hairlines, borders on white */
+  --itm8-grey-bg:       #F6F6F7; /* Neutral surface */
+
+  /* ---- Purple ramp (derived, for hover/press states & charts) ---- */
+  --itm8-purple-700:    #4A1C7C; /* Darker — press / hover on purple */
+  --itm8-purple-600:    #54218D;
+  --itm8-purple-500:    #5F259F; /* = base */
+  --itm8-purple-300:    #9F7EC6; /* = lavender */
+  --itm8-purple-100:    #CFBDE2; /* = lavender-light */
+  --itm8-purple-50:     #EEE9F5; /* = lavender-pale */
+
+  /* ======================================================
+     SEMANTIC ALIASES — prefer these in product/components
+     ====================================================== */
+  /* Surfaces */
+  --surface-page:       var(--itm8-white);
+  --surface-card:       var(--itm8-white);
+  --surface-muted:      var(--itm8-lavender-pale);
+  --surface-neutral:    var(--itm8-grey-bg);
+  --surface-inverse:    var(--itm8-purple);   /* purple section / hero */
+  --surface-inverse-2:  var(--itm8-black);    /* black section */
+
+  /* Text */
+  --text-strong:        var(--itm8-black);
+  --text-body:          var(--itm8-ink);
+  --text-heading:       var(--itm8-purple);
+  --text-muted:         var(--itm8-grey);
+  --text-on-inverse:    var(--itm8-white);
+  --text-link:          var(--itm8-purple);
+
+  /* Accents / interactive */
+  --accent-primary:     var(--itm8-purple);
+  --accent-primary-hover:var(--itm8-purple-700);
+  --accent-pop:         var(--itm8-green);    /* CTA / highlight pop */
+  --accent-pop-strong:  #1F7A52;              /* readable green text on white */
+
+  /* Lines & focus */
+  --border-default:     var(--itm8-grey-line);
+  --border-strong:      var(--itm8-purple);
+  --focus-ring:         var(--itm8-lavender);
+}

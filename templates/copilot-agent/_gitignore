@@ -1,0 +1,3 @@
+appPackage/build/
+# The SSO registration id and anything personal stay on your machine.
+env/.env.*.user

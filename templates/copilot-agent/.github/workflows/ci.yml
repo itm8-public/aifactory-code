@@ -1,0 +1,33 @@
+# Checks the Copilot package. No provisioning or publishing: a person runs atk provision/publish.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Secret scan
+        run: docker run --rm -v "$PWD:/repo" ghcr.io/gitleaks/gitleaks:v8.28.0 dir /repo --redact --no-banner
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 24
+      - name: Pinned tools match the plugin manifest
+        run: node scripts/sync-tools.mjs --check
+      # Schema and Microsoft's validation rules. Placeholder ids: CI never signs in or publishes.
+      - name: Validate the app package (Microsoft 365 Agents Toolkit)
+        run: |
+          grep -v '^TEAMS_APP_ID=' env/.env.dev > "$RUNNER_TEMP/validate.env"
+          echo "TEAMS_APP_ID=8c3a1f52-6a3e-4c1d-9f6e-2b7d1e0a4c11" >> "$RUNNER_TEMP/validate.env"
+          echo "MCP_SSO_REFERENCE_ID=ci-placeholder" >> "$RUNNER_TEMP/validate.env"
+          npx -y @microsoft/m365agentstoolkit-cli@1.1.18 validate --env-file "$RUNNER_TEMP/validate.env" --interactive false
