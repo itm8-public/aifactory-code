@@ -85,6 +85,7 @@ const MUTATIONS = {
       }
     },
   },
+  'AF-33': { run: (d) => write(d, 'src/server/lib/debug.ts', 'export const dump = (req: any) => console.log(req.body);\n') },
 };
 
 // Python agent: the same rules where a rule has a Python form.
@@ -101,6 +102,7 @@ const PY_MUTATIONS = {
     edit(d, 'app/main.py', (t) => t.replaceAll('agent_actions', 'agent_proposals').replaceAll('/decision', '/ok')),
   'AF-31': (d) => write(d, 'app/fetch.py', 'import httpx\n\n\nasync def get(url):\n    return await httpx.AsyncClient(verify=False).get(url)\n'),
   'AF-32': (d) => edit(d, 'AGENTS.md', (t) => t.replace(/^- Browser support:.*\n/m, '')),
+  'AF-33': (d) => write(d, 'app/debug.py', 'import logging\n\n\ndef dump(request):\n    logging.info(request.body)\n'),
 };
 
 describe('build check', () => {

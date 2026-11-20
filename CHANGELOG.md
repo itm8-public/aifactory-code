@@ -3,6 +3,20 @@
 All notable changes. Versions follow SemVer; 0.x while the pinned build rules are a draft. A new
 FAIL rule in the build check is listed under "May fail existing projects".
 
+## 0.8.2 - 2026-11-20
+
+Zone-aware production-readiness and governance steps, proportional to the solution's zone.
+
+- New [production-readiness.md](skills/aifactory-code/reference/production-readiness.md): the
+  production-readiness checklist, an ownership gate (a named system owner and business owner),
+  security requirements verified as acceptance criteria, and the five POC-to-production gates
+  surfaced. Applied to Yellow and Red; Green keeps only the free automated checks.
+- `/aifactory-code:ship` gained a zone-aware production-readiness step before commit; `handover.md`
+  and the `aifactory-code` skill point to the new checklist.
+- Build check AF-33 (WARN): no request body, headers or the whole environment written to logs.
+
+Naming of the five gates is provisional, pending the canonical order.
+
 ## 0.8.1 - 2026-11-20
 
 Curation for the public (source-available) copy: internal platform identifiers mocked. No
