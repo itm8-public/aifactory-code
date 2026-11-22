@@ -1,6 +1,6 @@
 /* itm8 design system: single entry point for app code.
    Tokens are copied unchanged from the org-default "itm8 Design System" in Claude Design
-   (identical to apps/web/src/styles/brand in itm8.aifactory-mgmt.app). Fonts are self-hosted
+   (identical to the brand tokens the Management App uses). Fonts are self-hosted
    through @fontsource (see fonts.ts), so no request goes to Google and the CSP can keep
    font-src 'self'. Never link Google Fonts. */
 @import url('./tokens/colors.css');

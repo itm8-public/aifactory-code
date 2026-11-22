@@ -1,6 +1,6 @@
 # Models and endpoints
 
-| Setting | Customer landing zone | itm8's shared platform (LZ-Online) |
+| Setting | Customer landing zone | itm8's shared platform |
 |---|---|---|
 | `AZURE_OPENAI_ENDPOINT` | Set by the platform: the Foundry account, or the AI gateway on Premium | Not used |
 | `AZURE_AI_PROJECT_ENDPOINT` | Set by the platform with direct AI | You set it: `https://<foundry-account>.services.ai.azure.com/api/projects/<foundry-project>` (the names the platform team gives you) |
@@ -17,9 +17,9 @@ or `FoundryChatClient(project_endpoint=…)` with `DefaultAzureCredential`.
 - **GPT models in the EU** (DataZoneStandard or regional Standard) are the default.
 - **Never** a Global deployment, a model from outside Azure, or a preview model, unless itm8 has
   recorded an exception (itm8's AI processing policy).
-- **Claude** in Foundry is Global only. It is allowed only on itm8's separate agent platform
-  account, under a time-limited waiver, for hosted agents, and never with Microsoft 365 personal
-  data without an approved DPIA. It is not available to apps in a landing zone.
+- **Claude** in Foundry is Global only. It is allowed only for hosted agents on itm8's separate
+  agent platform account, under an exception itm8 has recorded, and never with Microsoft 365
+  personal data without an approved DPIA. It is not available to apps in a landing zone.
 - Locally, `az login` gives `DefaultAzureCredential` your identity; your IP must be allowed on the
   Foundry account. Without settings the agent answers "not configured".
 

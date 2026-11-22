@@ -3,6 +3,17 @@
 All notable changes. Versions follow SemVer; 0.x while the pinned build rules are a draft. A new
 FAIL rule in the build check is listed under "May fail existing projects".
 
+## 0.8.4 - 2026-11-22
+
+- Removed internal names and references from docs and metadata: team names in the plugin
+  metadata, private repository names, internal pull request and policy references, internal
+  environment names, backlog identifiers in the G3 gate question, internal team and skill
+  references in the design skill, and internal compliance wording in the model guidance.
+- The G3 gate question in `templates/specs/gates.md`, and so the generated Spec Kit plan
+  template and the gates table new projects get in `plan.md`, no longer carries backlog
+  identifiers. Prose only: the gate ids and the Result and Note columns are unchanged, so no
+  behaviour change.
+
 ## 0.8.3 - 2026-11-22
 
 - Fixed: the gate installer's caller workflow now points at the published gate,
@@ -122,9 +133,9 @@ versions and current practice.
   sentence: add it to "This project".
 - The two new guards may prompt or block in any project, not only AI Factory projects. For a false
   positive, use the guard's off switch and tell the maintainers.
-- Build rules re-pinned to kit 0.2 at `9c85dc4` (replatform agent pull request 69): current
-  versions, the Baseline target, actions that need a person, and where hosted builders read the
-  rules. It also brings the 2026-11-11 kit changes (no-app platforms, shared resources).
+- Build rules re-pinned to kit 0.2 at `9c85dc4`: current versions, the Baseline target, actions
+  that need a person, and where hosted builders read the rules. It also brings the 2026-11-11 kit
+  changes (no-app platforms, shared resources).
 - Python agent template: `opentelemetry-api` 1.45.2 (CVE-2026-126360 in 1.45.1 failed the
   dependency audit).
 
@@ -133,10 +144,9 @@ versions and current practice.
 One change gate for security, the smallest change and the AI Factory rules, enforced from the
 first write.
 
-- Rules pin: build-kit 0.1 @ 09c48e5 (replatform agent `main`, pull request 65). New
-  pinned files `GUARD.md` (the change gate) and `PERFORMANCE.md`; `AGENTS.md` points to both. The
-  scaffold writes them to the project root and every `CLAUDE.md` imports them;
-  `/aifactory-code:update-rules` copies them too.
+- Rules pin: build-kit 0.1 @ 09c48e5. New pinned files `GUARD.md` (the change gate) and
+  `PERFORMANCE.md`; `AGENTS.md` points to both. The scaffold writes them to the project root and
+  every `CLAUDE.md` imports them; `/aifactory-code:update-rules` copies them too.
 - The change gate, adapted from Ponytail (MIT) and Cloudflare's security-audit skill (MIT): scope,
   stop and ask, one line per trust boundary with a refusal test, then the smallest change. The
   build rules win, security comes second, the smallest change last. The `aifactory-code` skill
@@ -242,4 +252,4 @@ First pilot release.
   self-hosted fonts. Fixes from the source: a real white logo, no red error colour.
 - Build check `AF-01` to `AF-25`, waivers in `.aifactory/build-check.json`.
 - Secret guard hook for Write, Edit and MultiEdit.
-- Rules pin: build-kit 0.1 @ 861542b (draft pull request 48 in itm8.aifactory-replatform.agent).
+- Rules pin: build-kit 0.1 @ 861542b.

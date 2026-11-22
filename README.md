@@ -43,8 +43,8 @@ at itm8 confirms the zone.
 ## Before you use it on customer work
 
 Claude Code reads and processes what you work on. Use it on a customer's code or data only when
-the customer has recorded consent to AI build tools in the engagement (draft AI processing policy
-#9). Otherwise use synthetic data and itm8-owned code. The design interview asks, and the build
+the customer has recorded consent to AI build tools in the engagement (itm8's AI processing
+policy). Otherwise use synthetic data and itm8-owned code. The design interview asks, and the build
 profile records the answer.
 
 ## Install in your tool
@@ -212,7 +212,7 @@ maintainers which text tripped it:
 ## Maintainers
 
 See [AGENTS.md](AGENTS.md). Short version: `npm run check` and `npm test` must pass; the build rules
-in `rules/build-kit/` are a pinned copy of the Replatform agent repository's `build-kit/` and are
+in `rules/build-kit/` are a pinned copy of itm8's AI Factory build-kit and are
 never edited here ([rules/README.md](rules/README.md)). The same holds for `skills/security-audit/`,
 pinned in `vendor/security-audit.pin.json`. The three skills from obra/superpowers are pinned in
 `vendor/superpowers.pin.json` and change only when the pin moves.

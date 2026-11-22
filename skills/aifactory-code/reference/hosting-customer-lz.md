@@ -2,7 +2,7 @@
 
 The Management app Wizard designs the landing zone and generates its Bicep, parameter files and
 pipelines (GitHub Enterprise or Azure DevOps). The app repository holds the app only. Source of
-truth: `itm8.aifactory-mgmt.app`, folders `wizard-infra/` and `wizard-docs/`; it wins on conflict.
+truth: the Management App's Wizard templates and Wizard documentation; they win on conflict.
 
 ## What the platform gives the app
 

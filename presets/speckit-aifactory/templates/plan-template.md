@@ -14,7 +14,7 @@
 |---|---|---|---|
 | G1 Data and zone | Does the feature fit the zone in AGENTS.md? Personal data means Red: stop | | |
 | G2 Stop and ask | Is any stop-and-ask item raised: sector rules, AI deciding about people, actions in other systems, a new data processor, real customer data? | | |
-| G3 Ask itm8 | Does it need what the platform lacks: a second app (B13), scheduled work (B12), file storage, a PostgreSQL extension, requests over 30 seconds? | | |
+| G3 Ask itm8 | Does it need what the platform lacks: a second app, scheduled work, file storage, a PostgreSQL extension, requests over 30 seconds? | | |
 | G4 Build rules | Which AF rules does it touch, and how does it keep them? | | |
 | G5 AI | Azure AI Foundry with the managed identity only; actions proposed and approved by a person; evaluation set updated | | |
 | G6 Smallest change | The first rung that fully works (GUARD.md step 4): skip what nobody asked for, reuse the codebase, then the platform, then an installed dependency; no new dependency without a reason; no infrastructure code; never by cutting a control | | |

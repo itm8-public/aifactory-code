@@ -13,7 +13,7 @@ them, and do not decide them yourself.
 | AI that acts in other systems (sends, pays, writes, deletes) | Every action needs human approval in code | Allowed only with an approval step in code, after a person agrees to the design |
 | Social scoring, hidden manipulation, biometric identification in public spaces | Prohibited practices (EU AI Act) | Never build these |
 | A third-party service that receives the app's data (SaaS APIs, analytics, e-mail, chat) | A new processor and an egress host | Ask. In Red, every outside host must be on the firewall allow-list |
-| Real customer data in a prompt, seed file, test or screenshot | Data protection; draft AI processing policy | Replace with synthetic data |
+| Real customer data in a prompt, seed file, test or screenshot | Data protection; itm8's AI processing policy | Replace with synthetic data |
 | Working on a customer's code or data with Claude Code | Claude Code is an AI processor of what it reads (itm8's AI processing policy) | Only with the customer's recorded consent; otherwise synthetic data and itm8-owned code |
 
 ## Ask itm8: the platform does not support it for every app yet
