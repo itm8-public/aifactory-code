@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   gate:
-    uses: itm8-aifactory/aifactory-gate/.github/workflows/gate.yml@v0
+    uses: itm8-public/aifactory-gate/.github/workflows/gate.yml@v0
     with:
       zone: {{ZONE}} # green, yellow or red, as registered for the solution
       level: {{LEVEL}} # 1 advisory, 2 customer changes and itm8 approves, 3 itm8 owns CI/CD

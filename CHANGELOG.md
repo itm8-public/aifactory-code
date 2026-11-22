@@ -3,6 +3,12 @@
 All notable changes. Versions follow SemVer; 0.x while the pinned build rules are a draft. A new
 FAIL rule in the build check is listed under "May fail existing projects".
 
+## 0.8.3 - 2026-11-22
+
+- Fixed: the gate installer's caller workflow now points at the published gate,
+  `itm8-public/aifactory-gate` at `@v0`. It named an organization that does not exist, so the
+  installed workflow could not resolve.
+
 ## 0.8.2 - 2026-11-20
 
 Zone-aware production-readiness and governance steps, proportional to the solution's zone.
