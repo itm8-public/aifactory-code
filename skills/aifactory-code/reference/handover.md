@@ -1,7 +1,7 @@
 # Hand over to itm8
 
-Before the solution goes to the Wizard (customer landing zone) or the platform team (LZ-Online),
-and before the Replatform agent or a reviewer looks at it:
+Before the solution goes to the Wizard (customer landing zone) or the platform team (itm8's
+shared platform), and before the Replatform agent or a reviewer looks at it:
 
 1. `build-check` shows no FAIL, and every WARN has a person's answer or a waiver.
 2. The checklist at the end of `AGENTS.md` ("Before you hand over") is ticked.
@@ -29,8 +29,8 @@ What itm8 does next:
 - **Customer landing zone:** the delivery lead enters the solution in the Wizard with the values
   from the README (`healthPath: /healthz`, migration job repository `<solution>/web`, command
   `node dist/migrate.js`), a person confirms the zone, and the generated pipelines deploy it.
-- **LZ-Online:** the platform team sets up identities, database, Container App, gateway listener
-  and Foundry access (see [hosting-lz-online.md](hosting-lz-online.md)).
+- **itm8's shared platform:** the platform team sets up identities, database, Container App,
+  gateway listener and Foundry access (see [hosting-lz-online.md](hosting-lz-online.md)).
 
 The build check is guidance, not a gate. The Replatform agent's checks and the human approvals
 remain the gate; an app built with this plugin just has far fewer findings.

@@ -1,6 +1,6 @@
 ---
 name: itm8-design
-description: itm8 design system for React and TypeScript app code in AI Factory web apps - CSS tokens, self-hosted fonts, Button, Badge, Card, ServiceCard, Input, Tabs, Logo, Icon and the 5th Element, plus the brand rules for layout, colour, type and voice. Use when building, styling or reviewing UI in an app scaffolded by aifactory-code or any itm8 React web app. For slides, documents, e-mail or plain HTML pages use the itm8-brand skill instead.
+description: itm8 design system for React and TypeScript app code in AI Factory web apps - CSS tokens, self-hosted fonts, Button, Badge, Card, ServiceCard, Input, Tabs, Logo, Icon and the 5th Element, plus the brand rules for layout, colour, type and voice. Use when building, styling or reviewing UI in an app scaffolded by aifactory-code or any itm8 React web app. It covers app code only, not slides, documents, e-mail or plain HTML pages.
 ---
 
 # itm8 design for app code
@@ -65,7 +65,7 @@ icons in a customer theme unless the customer asks for itm8 branding.
 
 ## Gaps in the source system
 
-- Icons are PNGs sliced from the brand sheet; vector icons are requested from itm8 Marketing.
+- Icons are PNGs sliced from the brand sheet; vector icons are not available yet.
 - The source's white logo had no fill (it rendered black); the kit's white logo sets
   `fill="#FFFFFF"` on the same paths.
 - The source's input used a red error colour, which the brand palette does not have; the kit uses

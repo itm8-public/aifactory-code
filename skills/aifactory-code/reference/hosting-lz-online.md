@@ -1,4 +1,4 @@
-# Hosting: itm8's shared platform (LZ-Online)
+# Hosting: itm8's shared platform (`--target lz-online`)
 
 itm8's own solutions run in a shared workload landing zone, in the EU (Sweden Central), behind
 `*.ai.itm8.cloud`. The platform team owns and operates it; ask them for the current platform
@@ -24,8 +24,8 @@ details. The app repository holds the app only.
 - The app's managed identity needs Foundry User on the project: the platform team grants it.
 - Deployment names are pinned per model (for example a GPT chat model and
   `text-embedding-3-large`); read the one you use from a setting such as `AI_CHAT_DEPLOYMENT`.
-- Claude is not available here: Claude models are Global only and are allowed only on the
-  separate agent platform account, under a time-limited waiver, for agents.
+- Claude is not available here: Claude models are Global only and are allowed only for agents on
+  the separate agent platform account, under an exception itm8 has recorded.
 
 ## Getting an app onto the platform
 

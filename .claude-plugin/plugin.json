@@ -1,8 +1,8 @@
 {
   "name": "aifactory-code",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Build new itm8 solutions that fit the AI Factory from the first line: a design interview, the pinned AI Factory build rules, starters for web apps (Fastify + React + PostgreSQL with Entra auth), MCP servers, AI agents (Microsoft Agent Framework or an in-app agent with human approval) and Microsoft 365 Copilot agents, the itm8 design system, a light spec-first flow (spec, plan with signed AI Factory gates, tasks, failing-test-first bug fixes, a GitHub Spec Kit preset), one change gate before any code (scope, a trust-boundary line with a refusal test per boundary, then the smallest change), a deterministic build check, a secret guard and a code guard that blocks unsafe code at write time, a command guard that stops reckless shell commands and asks before destructive ones, a guard that asks before CI and infrastructure edits, the AI Factory gate installer (a required check before merge and a secret check before every commit), a ship command that takes a change to a pull request in plain steps, a current-versions skill, three working-discipline skills from obra/superpowers (MIT), and Cloudflare's security-audit skill for full source audits. Never deploys.",
-  "author": { "name": "itm8 SE Digital Transformation" },
+  "author": { "name": "itm8" },
   "license": "LicenseRef-itm8-source-available",
   "keywords": ["itm8", "ai-factory", "build-kit", "azure", "react", "fastify", "postgresql", "design-system", "agent-framework", "mcp", "foundry", "copilot", "declarative-agent", "spec-driven", "spec-kit", "security", "secure-by-design", "guardrails", "current-versions"],
   "repository": "https://github.com/itm8-public/aifactory-code"

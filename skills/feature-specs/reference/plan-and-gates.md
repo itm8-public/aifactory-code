@@ -30,7 +30,7 @@ table, design, structure, complexity tracking) and `tasks.md`.
 |---|---|---|
 | G1 Data and zone | The data fits the zone in `AGENTS.md`; synthetic data in tests and seeds | Personal data while the zone is not Red (FAIL: stop); zone unknown for new data (ASK) |
 | G2 Stop and ask | No stop-and-ask item, or each one answered by a person (name them) | An item is open |
-| G3 Ask itm8 | Fits one `web` container with PostgreSQL | Needs a second app (B13), scheduled work (B12), file storage, an extension, more than 30 seconds per request |
+| G3 Ask itm8 | Fits one `web` container with PostgreSQL | Needs a second app, scheduled work, file storage, an extension, more than 30 seconds per request |
 | G4 Build rules | Name the AF rules it touches and how it keeps them (for example AF-17: the migration runs as the separate command) | It needs a waiver; only a person adds one |
 | G5 AI | No AI, or Azure AI Foundry with the managed identity, actions proposed and approved, evaluation set updated for new behaviour | Another AI provider, or an action that runs without approval (FAIL) |
 | G6 Smallest change | The first rung of the ladder in `GUARD.md` step 4 that fully works: nothing nobody asked for, reuse before new code, each new dependency has a reason in the note; no infrastructure code | A new framework, service or container without need; a change made smaller by cutting a control (FAIL) |
