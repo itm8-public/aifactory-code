@@ -79,7 +79,8 @@ for (const groups of Object.values(hooks.hooks)) {
 }
 
 // Relative links in Markdown (templates are checked after scaffolding, in the tests)
-const markdown = walk(PLUGIN_ROOT).filter((f) => f.endsWith('.md') && !rel(f).startsWith('templates/') && !rel(f).startsWith('rules/build-kit/'));
+// publish/overlay/ files link from their place in the public copy; the publish checks them there.
+const markdown = walk(PLUGIN_ROOT).filter((f) => f.endsWith('.md') && !rel(f).startsWith('templates/') && !rel(f).startsWith('rules/build-kit/') && !rel(f).startsWith('publish/'));
 for (const file of markdown) {
   const text = readFileSync(file, 'utf8');
   for (const m of text.matchAll(/\]\(([^)\s]+)\)/g)) {
