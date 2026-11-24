@@ -3,6 +3,16 @@
 All notable changes. Versions follow SemVer; 0.x while the pinned build rules are a draft. A new
 FAIL rule in the build check is listed under "May fail existing projects".
 
+## 0.9.0 - 2026-11-24
+
+- `/aifactory-code:ship` is now `/aifactory-code:submit`. Claude Code has its own built-in
+  `/ship`, so typing `/ship` ran Anthropic's command, not this plugin's. "Submit" says what it
+  does: send a finished change for review as a pull request. The steps are unchanged, and it still
+  never merges or deploys.
+- `/aifactory-code:ship` stays for now as one line that points to the new name. It runs nothing.
+- `/aifactory-code:gate`, the README, the `aifactory-code` skill and the production-readiness
+  checklist point to `/aifactory-code:submit`.
+
 ## 0.8.4 - 2026-11-22
 
 - Removed internal names and references from docs and metadata: team names in the plugin

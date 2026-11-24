@@ -22,5 +22,5 @@ be written and get a clear yes before running anything.
    ```
 
 4. Show the files it wrote. Do not commit or push unless the person asks; suggest
-   `/aifactory-code:ship` to open the pull request. Say that itm8 turns on the ruleset and the dev
+   `/aifactory-code:submit` to open the pull request. Say that itm8 turns on the ruleset and the dev
    and prod environments after the pull request is merged.

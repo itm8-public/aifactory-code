@@ -40,7 +40,7 @@ person gives and never invents them.
 ## 3. Security requirements as acceptance criteria (Yellow / Red)
 
 Each security requirement for the change is written as an **acceptance criterion** in the spec
-(`specs/NNN-slug/spec.md`) or the pull request, and **verified before ship**:
+(`specs/NNN-slug/spec.md`) or the pull request, and **verified before the change is submitted**:
 
 - one line per trust boundary (who sends what where, which control decides, what must never happen),
   each with a refusal test that passes (GUARD.md step 3, plan gate G7);

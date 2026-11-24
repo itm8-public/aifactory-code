@@ -52,7 +52,7 @@ People decide the zone, the hosting and anything on the "stop and ask" list. You
 | Expose tools or data over MCP | Use the `mcp-server` skill |
 | Style or lay out UI | Use the `itm8-design` skill |
 | Check readiness | Run the build check (below) and fix FAILs first |
-| Get a change production-ready before ship (owners, security criteria, zone gates) | [reference/production-readiness.md](reference/production-readiness.md), then `/aifactory-code:ship` |
+| Get a change production-ready before you submit it (owners, security criteria, zone gates) | [reference/production-readiness.md](reference/production-readiness.md), then `/aifactory-code:submit` |
 | Know where it will run | [reference/hosting-customer-lz.md](reference/hosting-customer-lz.md) or [reference/hosting-lz-online.md](reference/hosting-lz-online.md) |
 | Hand over to itm8 | [reference/handover.md](reference/handover.md) |
 | Use it from Microsoft 365 Copilot, Teams or Outlook | Use the `copilot-agent` skill |
