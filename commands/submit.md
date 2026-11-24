@@ -34,4 +34,9 @@ step does before running it.
    - pass: the change can be merged;
    - fail: what to fix, file by file, and offer to fix it;
    - needs-person: the itm8 review team looks at it; nothing to do but wait (say why it needs a person).
-7. Stop there. Never merge, approve, deploy or change repository settings, rulesets or the gate files.
+7. **Say where it shows up.** The change reaches the dev environment only after it is merged, and
+   then by itself: the pipeline puts every merge to main there. Tell the person: "Try it in your
+   dev environment after the check passes." For an experiment that should not go to review, point
+   to the sandbox instead. See
+   [`reference/environments.md`](../skills/aifactory-code/reference/environments.md).
+8. Stop there. Never merge, approve, deploy or change repository settings, rulesets or the gate files.

@@ -28,7 +28,8 @@ What itm8 does next:
 
 - **Customer landing zone:** the delivery lead enters the solution in the Wizard with the values
   from the README (`healthPath: /healthz`, migration job repository `<solution>/web`, command
-  `node dist/migrate.js`), a person confirms the zone, and the generated pipelines deploy it.
+  `node dist/migrate.js`), a person confirms the zone, and the generated pipelines deploy it: dev
+  on every push to `main`, production with an approval from a person.
 - **itm8's shared platform:** the platform team sets up identities, database, Container App,
   gateway listener and Foundry access (see [hosting-lz-online.md](hosting-lz-online.md)).
 

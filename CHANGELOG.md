@@ -3,6 +3,20 @@
 All notable changes. Versions follow SemVer; 0.x while the pinned build rules are a draft. A new
 FAIL rule in the build check is listed under "May fail existing projects".
 
+## 0.10.0 - 2026-11-24
+
+- A steady dev environment before production, with sandboxes for experiments. Experiments and
+  replatforming go in the sandbox from the Management App, where Azure MCP or ARM MCP may be used
+  directly. A change reaches dev only through a pull request, the check and the pipeline, which
+  deploys dev on every push to main; an MCP tool against dev is read-only, to diagnose. Production
+  goes through the pipeline with an approval from a person. The plugin never deploys to dev or
+  production and never suggests ARM MCP against either.
+- A new reference, `environments.md`, and matching lines in the skills, the stop-and-ask list, the
+  production-readiness checklist, the hand-over notes, the hosting page and the README.
+- `/aifactory-code:submit` ends by saying where the change shows up: "Try it in your dev
+  environment after the check passes."
+- The scaffolded `CLAUDE.md` of each starter carries the same rule.
+
 ## 0.9.0 - 2026-11-24
 
 - `/aifactory-code:ship` is now `/aifactory-code:submit`. Claude Code has its own built-in

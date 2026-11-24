@@ -9,6 +9,10 @@ zone** (`.aifactory/build-profile.json`). Build to Yellow until itm8 confirms th
   after itm8 confirms it): the full list below. These are prompts a person answers, not something
   Claude decides or signs.
 
+A change reaches production only through the pipeline, with an approval from a person, after it
+has been through dev. You never deploy it and never give or ask for that approval
+([environments.md](environments.md)).
+
 > Naming of the gates below is provisional; the canonical order is being set separately and will
 > slot in without changing what is checked.
 
