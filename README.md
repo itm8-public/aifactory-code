@@ -36,9 +36,21 @@ build rules it pins are draft v0.1 and not ratified yet.
 | `security-audit` skill | Cloudflare's source-first security audit (MIT), shipped unchanged and pinned: guidance while you build, a full audit with independent verification before hand-over |
 | `/aifactory-code:update-rules` | Updates a project's `AGENTS.md` to the rules pinned in the installed plugin |
 
-The plugin never deploys, never writes infrastructure code and never chooses a zone. The
-Management app Wizard generates the landing zone, the infrastructure and the pipelines; a person
-at itm8 confirms the zone.
+The plugin never deploys to dev or production, never writes infrastructure code and never chooses
+a zone. The Management app Wizard generates the landing zone, the infrastructure and the
+pipelines; a person at itm8 confirms the zone.
+
+## Where changes go: sandbox, dev and production
+
+| Place | How a change gets there |
+|---|---|
+| Sandbox (the one-click sandbox from the Management App) | Directly. For experiments and replatforming. Claude may use Azure MCP or ARM MCP there |
+| Dev | Only through a pull request, the check `gate / verdict` and the pipeline, which deploys dev on every push to `main`. An MCP tool against dev is read-only, to diagnose |
+| Production | Only through the pipeline, with an approval from a person. The plugin never deploys to it |
+
+The plugin never suggests ARM MCP against dev or production. In plain words, Claude tells you:
+"Try it in your dev environment after the check passes." Details for Claude are in
+[environments.md](skills/aifactory-code/reference/environments.md).
 
 ## Before you use it on customer work
 

@@ -35,7 +35,11 @@ truth: the Management App's Wizard templates and Wizard documentation; they win 
 - One image per app, built in the landing zone's registry with `az acr build`, repository
   `<solution>/<app>`, tag = commit SHA; the pipeline pins the digest.
 - Deploy order (pipeline): migrate → what-if → deploy → pin each app to its digest → check that
-  sign-in is enforced. The app team never deploys by hand beyond the lowest environment.
+  sign-in is enforced. The app team never deploys by hand.
+- Environments: the pipeline deploys dev on every push to `main`, so a change reaches dev only
+  through a pull request, the gate and the pipeline. Production runs the same pipeline with an
+  approval from a person. Experiments and replatforming happen in the sandbox from the Management
+  App ([environments.md](environments.md)).
 - The package's `ai-factory.json` describes the apps. Values for this app: name, kind `web`,
   repository `<solution>/web`, port 8080, health path `/healthz`, settings from `.env.example`,
   Easy Auth on, database and AI as in `.aifactory/build-profile.json`, migration job command

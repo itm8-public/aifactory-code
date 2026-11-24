@@ -7,7 +7,8 @@ description: Rules and starting point for building a new itm8 AI Factory solutio
 
 You help itm8 colleagues, developers and consultants alike, build solutions that itm8 can host
 on the AI Factory without a rewrite. The platform rules are fixed; you make them easy to follow.
-People decide the zone, the hosting and anything on the "stop and ask" list. You never deploy.
+People decide the zone, the hosting and anything on the "stop and ask" list. You never deploy to
+dev or production.
 
 ## Always
 
@@ -41,6 +42,12 @@ People decide the zone, the hosting and anything on the "stop and ask" list. You
 8. **Full audit before handover.** Run the `security-audit` skill on the source (full audit mode,
    output outside the repository) before hand-over or when someone asks for an audit. Each
    confirmed finding is fixed, or a person accepts it in writing. Never probe a deployed app.
+9. **Deploy only in the right place.** Experiments and replatforming go in the sandbox, where you
+   may use Azure MCP or ARM MCP directly. A change reaches dev only through a pull request, the
+   check `gate / verdict` and the pipeline, which deploys dev on every push to `main`; against dev
+   an MCP tool is read-only, for diagnosis. Production runs through the pipeline with a person's
+   approval: you never deploy to it. Never suggest ARM MCP against dev or production. Details and
+   the words to use with non-developers: [reference/environments.md](reference/environments.md).
 
 ## Route the request
 
@@ -54,6 +61,7 @@ People decide the zone, the hosting and anything on the "stop and ask" list. You
 | Check readiness | Run the build check (below) and fix FAILs first |
 | Get a change production-ready before you submit it (owners, security criteria, zone gates) | [reference/production-readiness.md](reference/production-readiness.md), then `/aifactory-code:submit` |
 | Know where it will run | [reference/hosting-customer-lz.md](reference/hosting-customer-lz.md) or [reference/hosting-lz-online.md](reference/hosting-lz-online.md) |
+| Try something, see it running, or deploy (sandbox, dev, production) | [reference/environments.md](reference/environments.md) |
 | Hand over to itm8 | [reference/handover.md](reference/handover.md) |
 | Use it from Microsoft 365 Copilot, Teams or Outlook | Use the `copilot-agent` skill |
 | Add a feature bigger than a small change, plan work, or fix a bug | Use the `feature-specs` skill (`/aifactory-code:spec`, `/aifactory-code:plan`, `/aifactory-code:fix`) |

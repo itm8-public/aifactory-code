@@ -56,3 +56,6 @@ drizzle/                  generated SQL migrations, committed
 - Migrations or `CREATE TABLE` at startup; `CREATE EXTENSION`.
 - Timers, queues or files on disk inside the server; requests longer than 30 seconds.
 - Bicep, Terraform or deploy pipelines in this repository.
+- A deploy, or a change to dev or production Azure resources with `az`, Azure MCP or ARM MCP. Dev
+  gets a change through a pull request, the gate and the pipeline; use the sandbox to experiment
+  ([environments](../aifactory-code/reference/environments.md)).

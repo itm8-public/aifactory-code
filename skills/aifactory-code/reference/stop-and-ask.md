@@ -14,6 +14,7 @@ them, and do not decide them yourself.
 | Social scoring, hidden manipulation, biometric identification in public spaces | Prohibited practices (EU AI Act) | Never build these |
 | A third-party service that receives the app's data (SaaS APIs, analytics, e-mail, chat) | A new processor and an egress host | Ask. In Red, every outside host must be on the firewall allow-list |
 | Real customer data in a prompt, seed file, test or screenshot | Data protection; itm8's AI processing policy | Replace with synthetic data |
+| A change to dev or production Azure resources (a deploy, a resource edit, an Azure MCP or ARM MCP write) | Dev changes arrive only through a pull request, the gate and the pipeline; production only through the pipeline with an approval | Stop. Try it in the sandbox, or send the app change as a pull request; new or changed resources come from the Wizard |
 | Working on a customer's code or data with Claude Code | Claude Code is an AI processor of what it reads (itm8's AI processing policy) | Only with the customer's recorded consent; otherwise synthetic data and itm8-owned code |
 
 ## Ask itm8: the platform does not support it for every app yet

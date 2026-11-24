@@ -18,4 +18,8 @@
 - Before you write or change code, run the gate in `GUARD.md`: scope, stop and ask, one line per
   trust boundary with a refusal test, then the smallest change. End each answer with what you
   skipped or did not check.
+- Where changes go: experiments and replatforming in the sandbox (Azure MCP or ARM MCP may be used
+  there); dev only through a pull request, the gate and the pipeline, which deploys dev on every push
+  to `main` (an MCP tool against dev is read-only, to diagnose); production through the pipeline with
+  an approval from a person. Never deploy, and never use ARM MCP against dev or production.
 - Never write `.env` or secret values; settings are names in `.env.example`.

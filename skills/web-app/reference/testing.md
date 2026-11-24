@@ -47,3 +47,7 @@ landing zone has to provide these first:
   redirect URI;
 - with a database: a job inside the network that creates and drops a database per pull request on
   the non-production server, and a synthetic seed command in the app (there is none today).
+
+Until then a change is tried in the dev environment after the check passes and the change is
+merged (the pipeline deploys dev on every push to `main`), and an experiment is tried in the
+sandbox ([environments](../../aifactory-code/reference/environments.md)).
