@@ -37,6 +37,9 @@ describe('install-gate', () => {
     assert.match(wf, /level: 2 /);
     assert.match(wf, /test-command: "npm ci && npm test"/);
     assert.match(wf, /gate\.yml@v0/);
+    // gate.yml inherits these from the caller and must never ask for them itself (gate 0.5.0).
+    assert.match(wf, /^  actions: read #/m, 'a push to main reuses the pull request verdict');
+    assert.match(wf, /^  pull-requests: write #/m, 'the gate posts its result as one pull request comment');
     assert.doesNotMatch(wf, /\{\{/);
     assert.match(callerWorkflow({ zone: 'green', level: 2, testCommand: '', nodeVersion: '24' }), /test-command: ""/);
     assert.ok(!DEPLOY_STEP.test(wf), 'the caller signs in to nothing itself, so build check AF-09 passes');

@@ -3,6 +3,15 @@
 All notable changes. Versions follow SemVer; 0.x while the pinned build rules are a draft. A new
 FAIL rule in the build check is listed under "May fail existing projects".
 
+## 0.10.1 - 2026-11-25
+
+- `/aifactory-code:gate` writes the caller workflow of aifactory gate 0.5.0. It also grants
+  `actions: read` (a push to main reuses the pull request's verdict) and `pull-requests: write`
+  (the gate posts its result as one pull request comment); without them both features stay off. An
+  existing install keeps working; add the two lines to its `permissions:` to turn them on.
+- The `level` comment says what the gate does: 1 is advisory and never blocks; 2 and 3 block on
+  anything but pass.
+
 ## 0.10.0 - 2026-11-24
 
 - A steady dev environment before production, with sandboxes for experiments. Experiments and
