@@ -12,16 +12,27 @@ on:
 permissions:
   contents: read
   id-token: write # the gate signs in to itm8's review Foundry with GitHub OIDC when ai-review is on
+  actions: read # a push to main reuses the pull request's verdict
+  pull-requests: write # the gate posts its result as one pull request comment
 
 jobs:
   gate:
+    # @v0 is the stable channel. To soak a prerelease before it is promoted, pin @v0-next instead.
     uses: itm8-public/aifactory-gate/.github/workflows/gate.yml@v0
     with:
       zone: {{ZONE}} # green, yellow or red, as registered for the solution
-      level: {{LEVEL}} # 1 advisory, 2 customer changes and itm8 approves, 3 itm8 owns CI/CD
+      level: {{LEVEL}} # 1 advisory (never blocks); 2 and 3 block on anything but pass
+      # profile: solo # self-service: the gate self-serves green-zone CI/infra changes. Set up the
+      #               # repository with `setup-repo.mjs --profile solo`. Secrets, the red zone,
+      #               # confirmed critical/high findings and yellow/red infra still need a person.
       node-version: '{{NODE_VERSION}}'
       test-command: {{TEST_COMMAND}}
-      # The AI review, once the customer has agreed to it. Values come from itm8 at onboarding.
+      # The AI review. The values come from the customer's page in the AI Factory Management App,
+      # once the customer's consent is recorded there; the review identity lives in itm8's tenant,
+      # so nothing is set up in the customer's Azure. Turn it on with
+      # `setup-repo.mjs --repo OWNER/NAME --ai-review ...` (it refuses empty or malformed values
+      # and opens a pull request), not by hand: ai-review: true with an empty value makes every
+      # PR need a person. See docs/ai-review-onboarding.md.
       ai-review: false
       review-endpoint: ''
       azure-client-id: ''
